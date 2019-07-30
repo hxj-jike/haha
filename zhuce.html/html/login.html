@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .content {
+            width: 600px;
+            height: 300px;
+            margin: 100px auto;
+            text-align: center;
+            border: 1px solid hotpink;
+        }
+
+        input {
+            width: 300px;
+            height: 50px;
+            border: 1px solid royalblue;
+            padding-left: 30px;
+            margin-top: 30px;
+
+        }
+
+        button {
+            width: 80px;
+            height: 50px;
+            background: hotpink;
+            border: 1px solid forestgreen;
+            color: #fff;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+    <script src="../js/jquery-3.4.1.js"></script>
+</head>
+
+<body>
+    <div class="content">
+        <input type="text" placeholder="请输入用户名" id="username"><br>
+        <input type="password" placeholder="请输入密码" id="pwd"><br>
+        <button id="btn">登录</button>
+    </div>
+    <script>
+        $(function (){
+            $('#btn').click(function(){
+            var username = $.trim($('#username').val());
+            var password = $.trim($("#pwd").val());
+                if(username.length ==0 || password.length==0 ){
+                    alert('请完善信息');
+                }
+           else{
+                $.ajax({
+                    type:'post',
+                    url:'../app/login.php',
+                    data:'username=' + username +'&password=' +password,
+                    dataType: "json",
+                    success:function(res){
+                        if(res == 1){
+                            alert('登录成功');
+                        }else{
+                alert('用户名或密码错误');
+            }
+                    }
+                })
+            }
+        })
+        })
+    </script>
+
+
+</body>
+
+</html>
